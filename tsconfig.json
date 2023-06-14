@@ -13,7 +13,8 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es2016"
+    "target": "es2016",
+    "useUnknownInCatchVariables": false
   },
   "exclude": [
     "src/**/*.test.ts"

@@ -1,16 +1,48 @@
-// src/index.ts
+/**
+ * Required External Modules
+ */
 
-import http from 'http';
+import * as dotenv from 'dotenv';
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import { itemsRouter } from './items/items.router';
+import { errorHandler } from './middleware/error.middleware';
+import { notFoundHandler } from './middleware/not-found.middleware';
 
-export const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'application/json' });
-  res.end(
-    JSON.stringify({
-      data: 'It Works!',
-    }),
-  );
-});
+dotenv.config();
 
-server.listen(3000, () => {
-  console.log('Server running on http://localhost:3000/');
+/**
+ * App Variables
+ */
+
+if (!process.env.PORT) {
+  process.exit(1);
+}
+
+const PORT: number = parseInt(process.env.PORT as string, 10);
+
+const app = express();
+
+/**
+ *  App Configuration
+ */
+
+app.use(helmet());
+app.use(cors());
+app.use(express.json());
+
+app.use('/api/menu/items', itemsRouter);
+
+// Error handler to deal with errors other than not found
+app.use(errorHandler);
+// Not Found handler should be the last middleware
+app.use(notFoundHandler);
+
+/**
+ * Server Activation
+ */
+
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
 });
