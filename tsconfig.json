@@ -1,21 +1,25 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "module": "commonjs",
-    "rootDir": "./",
-    "resolveJsonModule": true, /* in case you are importing JSON files */
-    "outDir": "./build",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "lib": [
+      "es6"
+    ],
+    "module": "commonjs",
     "noImplicitAny": true,
+    "outDir": "./build",
+    "resolveJsonModule": true,
+    "rootDir": "./",
     "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2016"
   },
+  "exclude": [
+    "src/**/*.test.ts"
+  ],
   "include": [
     "src",
     "package.json"
-  ],
-  "exclude": [
-    "src/**/*.test.ts"
   ]
 }
